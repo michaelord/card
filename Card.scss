@@ -2,8 +2,7 @@
 	$parent: &;
 
 	border-radius: var(--radius);
-	// TODO: this
-	// margin-bottom: var(--space-md);
+
 	overflow: hidden;
 	box-shadow: var(--shadow-md);
 	position: relative;
@@ -11,8 +10,12 @@
 	display: flex;
 	flex-direction: column;
 
+	&:not(:only-child) {
+		margin-bottom: var(--space-md);
+	}
+
 	&--bordered {
-		border: 1px solid var(--clr-subtle);
+		border: 1px solid var(--color-subtle);
 	}
 
 	&--primary-media {
@@ -21,11 +24,6 @@
 		}
 
 		#{$parent}__header {
-			// TODO: remove padding when it's technically the last child
-			// padding-bottom: 0;
-			&:last-child {
-				background: var(--clr-temp);
-			}
 		}
 	}
 
@@ -87,7 +85,13 @@
 		}
 	}
 
+	&__title {
+		&:only-child {
+			margin-bottom: 0;
+		}
+	}
+
 	&__footer {
-		background-color: var(--clr-subtle);
+		background-color: var(--color-subtle);
 	}
 }

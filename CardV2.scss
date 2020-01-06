@@ -1,0 +1,44 @@
+.cardv2 {
+	$parent: &;
+
+	display: block;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	color: inherit;
+
+	border-radius: var(--radius-md);
+	overflow: hidden;
+
+	box-shadow: var(--shadow-none);
+	transition: box-shadow 0.3s;
+
+	&:hover {
+		box-shadow: var(--shadow-md);
+	}
+
+	&__media {
+		margin: 0;
+	}
+
+	&__body {
+		display: flex;
+		height: 100%;
+
+		flex-direction: column;
+		position: relative;
+		z-index: 2;
+	}
+
+	&__header {
+		max-width: 540px;
+	}
+
+	&__title {
+		margin: 0;
+	}
+
+	&__main {
+		padding: var(--component-padding);
+	}
+}

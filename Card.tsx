@@ -1,53 +1,44 @@
-import * as React from 'react';
-
+import {CtaGroup} from 'components/content';
+import {Heading, LinkItem, Media, MediaProps, RichText} from 'components/editable';
+import {getModifiers} from 'components/libs';
+import * as Types from 'components/types';
+import React, {memo} from 'react';
 import './Card.scss';
 
-import {getModifiers} from 'components/libs';
+type LinkGroup = LinkItem | Array<LinkItem>;
 
-import {Media, MediaProps, Heading, RichText, Link, LinkItem} from 'components/editable';
-import {Theme} from 'components/types';
-type CardProps = {
-	children?: React.ReactNode;
-	theme?: Theme;
+export type CardProps = {
+	children?: Types.Children;
+	theme?: Types.Theme;
 	media?: MediaProps;
-	title?: string;
+	title?: Types.Text;
 	content?: string;
-	href?: string | null;
-	cta?: LinkItem | Array<LinkItem>;
+	href?: Types.Url;
+	cta?: LinkGroup;
+	accent?: Types.Accent;
+	className?: Types.ClassName;
 };
 
-export const Card = (props: CardProps) => {
+export const Card = memo((props: CardProps) => {
 	const base: string = 'card';
 
-	const {children, theme = 'default', media, title, content, href, cta} = props;
+	const {children, theme = 'default', media, title, content, href, cta, accent, className} = props;
 
 	const atts: object = {
-		className: getModifiers(base, {}),
+		className: getModifiers(base, {}) + (className ? ` ${className}` : ''),
 		'data-theme': theme,
+		'data-accent': accent,
 	};
 
 	return (
 		<div {...atts}>
 			{media && <Media {...media} />}
 			<div className={`${base}__main`}>
-				<Heading title={title} href={href} />
+				<Heading title={title} href={href} className={`${base}__title`} />
 				<RichText content={content} />
-				{children}
-
-				{cta && (
-					<div>
-						{Array.isArray(cta) ? (
-							<div className="link-group">
-								{cta.map((link, index) => (
-									<Link priority="secondary" {...link} isWide key={`link-${index}`} />
-								))}
-							</div>
-						) : (
-							<Link priority="secondary" {...cta} isWide />
-						)}
-					</div>
-				)}
+				{children && children}
+				<CtaGroup items={cta} />
 			</div>
 		</div>
 	);
-};
+});

@@ -1,5 +1,5 @@
 ---
-title: Card
+title: Card v1
 tags : ["all", "card", "wip"]
 category: "Undefined"
 logo: "./thumbnail.jpg"
@@ -7,5 +7,13 @@ icon: '<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" fill="none"
 published : true
 ---
 import { Playground, PlaygroudCode } from 'components/styleguide';
+import {CardV1, CardV2} from 'components/card';
+import * as Layout from 'components/layout';
 
 [TODO]
+
+<Layout.Row>
+    <CardV1 />
+    <CardV1 />
+    <CardV1 />
+</Layout.Row>
